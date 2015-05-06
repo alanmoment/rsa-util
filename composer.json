@@ -4,16 +4,20 @@
     "description": "Use OpenSSL for data encrypt and decrypt tool.",
     "authors": [
         {
-            "name": "alan",
+            "name": "Alan",
             "email": "alan.moment77@gmail.com"
         }
     ],
     "require": {
         "php": ">=5.3.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "4.6.*"
+    },
     "autoload": {
-        "psr-0": {
-            "RsaUtil": "src/"
+        "psr-4": {
+            "Rsa\\": "src/Rsa/"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
