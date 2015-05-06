@@ -1,31 +1,13 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use Rsa\RsaUtil;
 
 $RsaUtil = new RsaUtil();
-$RsaUtil->setKeyStorePath("./example/keystores/");
-$RsaUtil->generate();
+$RsaUtil->setKeyStorePath("./keystores/");
+$encrypt = $RsaUtil->generate()->encrypt("I am test data.");
+echo $encrypt;
 
-$certKey = base64_decode($RsaUtil->getCertKey());
-
-while (!$RsaUtil->isExist()) {
-	sleep(1);
-}
-
-if ($RsaUtil->verifyKey($certKey)) {
-	echo $RsaUtil->getUuid() . " is valid.\n";
-} else {
-	echo $RsaUtil->getUuid() . " is invalid.\n";
-}
-
-$encryptKey = base64_decode($RsaUtil->getEnCryptKey());
-openssl_public_encrypt("I'm data.", $encrypt, $certKey);
-
-$encrypt = base64_encode($encrypt);
-echo "I'm encrypt data: $encrypt\n";
-
-$decryptKey = base64_decode($RsaUtil->getDeCryptKey());
-openssl_private_decrypt(base64_decode($encrypt), $decrypted, $decryptKey);
-echo "I'm decrypt data: $decrypted\n";
+$decrypted = $RsaUtil->decrypt($encrypt);
+echo $decrypted;
