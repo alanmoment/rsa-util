@@ -135,6 +135,7 @@ class RsaUtil {
 		$this->certKey = base64_encode($certOut);
 		$this->enCryptKey = base64_encode(file_get_contents($derFile));
 		$this->deCryptKey = base64_encode($privateKey);
+		return $this;
 	}
 
 	public function setDate($date) {
